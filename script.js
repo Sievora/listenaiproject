@@ -47,3 +47,45 @@ function stop() {
   startBtn.style.display = 'flex';
   stopBtn.style.display = 'none';
 }
+
+let mediaRecorder;
+let audioChunks = [];
+let timerInterval;
+let secondElapsed = 0;
+
+const startBtn = document.getElementById('startBtn');
+const stopBtn = document.getElementById('stopBtn');
+const downloadLink = document.getElementById('downloadLink');
+
+// start recording
+startBtn.addEventListener('click', async () => {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true})
+    mediaRecorder = new MediaRecorder(stream);
+    audioChunks = [];
+
+    startBtn.disabled = true;
+    stopBtn.disabled = false;
+
+    mediaRecorder.ondataavailable = (event) => {
+      audioChunks.push(event.data);
+    };
+    mediaRecorder.onstop = () => {
+      const audioBlob = new Blob(audioChunks, {type: "audio/webm"});
+      const audioUrl = URL.createObjectURL(audioBlob);
+      downloadLink.href = audioUrl;
+      downloadLink.download = "recording.webm";
+      downloadLink.textContent = "Download Audio";
+      startBtn.disabled = false;
+      stopBtn.disabled =true;
+      stopTimer();
+    };
+
+    mediaRecorder.start();
+    startTimer();
+
+} catch (error) {
+  console.error("Error accessing microphone:", error);
+  alert('Microphone access is required for recording.');
+}
+});
