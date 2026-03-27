@@ -357,7 +357,7 @@ body {
     transition: 0.3s ease;
     cursor: pointer;
     font-size: 12px;
-    display: none;
+    display: flex;
     align-items: center;
     gap: 10px;
 }
