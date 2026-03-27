@@ -246,15 +246,16 @@ body {
 
 .content .tool .fa-microphone {
     position: absolute;
-    bottom: 6px;
+    bottom: 5px;
+    
     left: 10px;
     background-color: #090f14;
-    padding: 15px 17px;
+    padding: 13px;
     border-radius: 50px;
     cursor: pointer;
     transition: 0.3s ease;
     z-index: 999999999;
-   
+ 
 }
 
 
@@ -308,10 +309,10 @@ body {
 .content .tool .fa-arrow-up {
      position: absolute;
     z-index: 9999;
-    bottom: 6px;
+    bottom: 5px;
     right: 10px;
     background-color: #090f14;
-    padding: 15px 17px;
+  
     border-radius: 50px;
     cursor: pointer;
     transition: 0.3s ease;
